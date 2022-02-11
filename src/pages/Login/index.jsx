@@ -1,25 +1,31 @@
-import {
-  Box,
-  Button,
-  Checkbox,
-  Container,
-  FormControlLabel,
-  Grid,
-  TextField,
-  Typography,
-  Link,
-} from "@mui/material";
+import { Box, Container, Typography } from "@mui/material";
+import { useFormik } from "formik";
+import * as yup from "yup";
+
+import CustomInput from "components/CustomInput";
+import CustomRoundedButton from "components/CustomRoundedButton";
+import { useNavigate } from "react-router-dom";
+
+const validationSchema = yup.object({
+  username: yup.string("Enter your username").required("Username is required"),
+  password: yup
+    .string("Enter your password")
+    .min(8, "minimum 8 characters length")
+    .required("Password is required"),
+});
 
 const Login = () => {
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    // eslint-disable-next-line no-console
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
-  };
+  const navigate = useNavigate();
+  const formik = useFormik({
+    initialValues: {
+      username: "test_user",
+      password: "foobar",
+    },
+    validationSchema: validationSchema,
+    onSubmit: (values) => {
+      navigate("/candidates")
+    },
+  });
   return (
     <Container component="main" maxWidth="xs">
       <Box
@@ -36,51 +42,49 @@ const Login = () => {
         <Typography component="h2" variant="body1" sx={{ color: "#808189" }}>
           Fill in required fields to sign in
         </Typography>
-        <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
-          <TextField
-            margin="normal"
+        <Box
+          component="form"
+          onSubmit={formik.handleSubmit}
+          noValidate
+          sx={{ mt: 5 }}
+        >
+          <CustomInput
             required
             fullWidth
-            id="email"
-            label="Username"
-            name="email"
-            autoComplete="email"
-            autoFocus
+            id="username"
+            title="Username"
+            placeholder="username"
+            name="username"
+            value={formik.values.username}
+            onChange={formik.handleChange}
+            error={formik.touched.username && Boolean(formik.errors.username)}
+            helperText={formik.touched.username && formik.errors.username}
           />
-          <TextField
-            margin="normal"
-            required
-            fullWidth
-            name="password"
-            label="Password"
-            type="password"
-            id="password"
-            autoComplete="current-password"
-          />
-          <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
-            label="Remember me"
-          />
-          <Button
+          <Box mt={2}>
+            <CustomInput
+              required
+              fullWidth
+              name="password"
+              placeholder="password"
+              title="Password"
+              type="password"
+              id="password"
+              value={formik.values.password}
+              onChange={formik.handleChange}
+              error={formik.touched.password && Boolean(formik.errors.password)}
+              helperText={formik.touched.password && formik.errors.password}
+            />
+          </Box>
+
+          <CustomRoundedButton
             type="submit"
             fullWidth
+            color="secondary"
             variant="contained"
             sx={{ mt: 3, mb: 2 }}
           >
-            Sign In
-          </Button>
-          <Grid container>
-            <Grid item xs>
-              <Link href="#" variant="body2">
-                Forgot password?
-              </Link>
-            </Grid>
-            <Grid item>
-              <Link href="#" variant="body2">
-                {"Don't have an account? Sign Up"}
-              </Link>
-            </Grid>
-          </Grid>
+            Log In
+          </CustomRoundedButton>
         </Box>
       </Box>
     </Container>

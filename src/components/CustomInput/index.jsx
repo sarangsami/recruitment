@@ -1,28 +1,30 @@
-import { Box, TextField } from "@mui/material";
+import { Box, TextField, Typography } from "@mui/material";
 import { styled } from "@mui/material/styles";
-const CustomizedTextField = styled(TextField)({
-  "& label.Mui-focused": {
-    color: "green",
-  },
-  "& .MuiInput-underline:after": {
-    borderBottomColor: "green",
-  },
+
+const BootstrapInput = styled(TextField)(({ theme }) => ({
   "& .MuiOutlinedInput-root": {
-    "& fieldset": {
-      borderColor: "red",
-    },
-    "&:hover fieldset": {
-      borderColor: "yellow",
-    },
-    "&.Mui-focused fieldset": {
-      borderColor: "green",
-    },
+    borderRadius: 8,
+    marginTop: 8,
   },
-});
+  ".MuiFormHelperText-root": {
+    margin: 4,
+  },
+}));
 
 const CustomInput = (props) => {
-  <Box>
-    <CustomizedTextField {...props}/>
-  </Box>;
+  const { id, title, helperText } = props;
+  return (
+    <Box>
+      <Typography
+        component="label"
+        variant="body2"
+        sx={{ fontWeight: "bold" }}
+        htmlFor={id}
+      >
+        {title}
+      </Typography>
+      <BootstrapInput helperText={ helperText} id={id} {...props} />
+    </Box>
+  );
 };
 export default CustomInput;

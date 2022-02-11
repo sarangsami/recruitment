@@ -7,12 +7,30 @@ import {
   Toolbar,
   AppBar,
 } from "@mui/material";
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: "#1013EF",
+    },
+    secondary:{
+      main:"#EF1083"
+    },
+    error:{
+      main:"#FA1B1B"
+    },
+    success:{
+      main:"#10EF7C"
+    }
+  },
+});
 
 export default function Layout({ children }) {
   return (
-    <React.Fragment>
+    <ThemeProvider theme={theme}>
       <CssBaseline />
-      <AppBar>
+      <AppBar color="inherit">
         <Toolbar>
           <Typography variant="h6" component="div">
             Project
@@ -23,6 +41,6 @@ export default function Layout({ children }) {
       <Container>
         <Box sx={{ my: 2 }}>{children}</Box>
       </Container>
-    </React.Fragment>
+    </ThemeProvider>
   );
 }
