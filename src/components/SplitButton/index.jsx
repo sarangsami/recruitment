@@ -5,21 +5,25 @@ import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 
 export default function SplitButton(props) {
   const handleClick = () => {
-    console.info(`You clicked`);
+    props.handleClick();
   };
 
   return (
     <ButtonGroup
-      sx={{ maxWidth: 180,borderRadius:2 }}
+      sx={{ maxWidth: 180, borderRadius: 2 }}
       fullWidth
       variant="contained"
-      {...props}
+      color={props.color}
       aria-label="split button"
     >
-      <Button fullWidth sx={{ textTransform: "none",borderRadius:2,fontWeight:"bold" }} onClick={handleClick}>
+      <Button
+        fullWidth
+        sx={{ textTransform: "none", borderRadius: 2, fontWeight: "bold" }}
+        onClick={handleClick}
+      >
         {props.children}
       </Button>
-      <Button sx={{ maxWidth: 16,borderRadius:2 }}>
+      <Button sx={{ maxWidth: 16, borderRadius: 2 }}>
         <ArrowDropDownIcon />
       </Button>
     </ButtonGroup>
