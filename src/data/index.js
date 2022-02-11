@@ -12,6 +12,10 @@ let data = [
     skills: ["React", "Laravel"],
     status: "First contact",
     experience: 3,
+    phoneNumber:"+989170910019",
+    position:"Frontend",
+    candidateSource:"Linkedin",
+    location:"Germany"
   },
   {
     id: 2,
@@ -26,6 +30,10 @@ let data = [
     skills: [ "Laravel"],
     status: "Rejected",
     experience: 2,
+    phoneNumber:"+989170910019",
+    position:"CTO",
+    candidateSource:"Linkedin",
+    location:"Georgia"
   },
   {
     id: 3,
@@ -40,6 +48,10 @@ let data = [
     skills: ["MySQL"],
     status: "Interview",
     experience: 1,
+    phoneNumber:"+989170910019",
+    position:"Backend",
+    candidateSource:"Linkedin",
+    location:"Ghana"
   },
 ]
 
