@@ -11,7 +11,9 @@ import {
   Autocomplete,
   Box,
   Checkbox,
+  Chip,
   IconButton,
+  Stack,
   TextField,
   Typography,
 } from "@mui/material";
@@ -72,8 +74,14 @@ const EditableTextView = ({ title, value, onSubmit, data, multiple }) => {
               }}
             />
           )
-        ) : (
+        ) : typeof value === "string"|| typeof value === "number" ? (
           <Typography>{value}</Typography>
+        ) : (
+          <Stack direction="row" spacing={1}>
+            {value.map((item,id)=>(
+              <Chip label={item} key={id} />
+            ))}
+          </Stack>
         )}
         {isEdit ? (
           <Fragment>

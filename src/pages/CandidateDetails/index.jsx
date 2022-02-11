@@ -356,6 +356,7 @@ const CandidateDetails = () => {
                     value={commentInput}
                     onChange={(e) => setCommentInput(e.target.value)}
                     fullWidth
+                    onKeyPress={(e)=>e.key === "Enter"?handleCommentSubmit():null}
                     sx={{ height: "100%", mx: 2 }}
                     placeholder="Type to comment"
                   />
