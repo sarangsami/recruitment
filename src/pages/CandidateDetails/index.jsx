@@ -56,7 +56,6 @@ const CandidateDetails = () => {
         new: "",
         message: `You added ${foundUser.firstName} to the candidate list`,
       });
-      console.log(newHistory);
       setChangeLog(newHistory);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -445,6 +444,7 @@ const CandidateDetails = () => {
                 <Box p={3}>
                   {changeLog.map((item, key) => (
                     <Box
+                    key={key}
                       py={item.type === "comment" ? 0 : 2}
                       sx={{ borderBottom: "2px dashed #E6E6E7" }}
                     >
@@ -461,7 +461,7 @@ const CandidateDetails = () => {
                           date={item.date}
                           old={item.old}
                           new={item.new}
-                          key={key}
+                       
                         />
                       )}
                     </Box>

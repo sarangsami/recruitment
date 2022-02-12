@@ -32,22 +32,55 @@ const Dashboard = () => {
   }, []);
 
   const handleTagDelete = (tag) => {
-   let finalSearch = [...searched]
-   let index = finalSearch.indexOf(tag)
-   finalSearch.splice(index,1)
-   setSearched(finalSearch)
-  };
+    let finalSearch = [...searched];
+    let index = finalSearch.indexOf(tag);
+    finalSearch.splice(index, 1);
 
-  
+    if (!finalSearch.length) {
+      setState((prev) => ({ ...prev, tableData: data }));
+    }
+    setSearched(finalSearch);
+  };
 
   const handleSearchSubmit = () => {
     if (searchInput !== "") {
       let finalSearchs = [...searched];
       finalSearchs.push(searchInput);
       setSearched(finalSearchs);
-      setSearchInput("")
+
+      let nameSearch = state.tableData.filter(
+        (o) => o.firstName === searchInput
+      );
+      let familySearch = state.tableData.filter(
+        (o) => o.lastName === searchInput
+      );
+      let phoneSearch = state.tableData.filter(
+        (o) => o.phoneNumber === searchInput
+      );
+      let emailSearch = state.tableData.filter((o) => o.email === searchInput);
+      let positionSearch = state.tableData.filter(
+        (o) => o.position === searchInput
+      );
+
+      let skillsSearch = state.tableData.filter((o) =>
+        o.skills.includes(searchInput)
+      );
+
+      let final = [
+        ...nameSearch,
+        ...familySearch,
+        ...phoneSearch,
+        ...emailSearch,
+        ...positionSearch,
+        ...skillsSearch,
+      ];
+
+      setState((prev) => ({ ...prev, tableData: final }));
+
+      setSearchInput("");
     }
   };
+
   return (
     <div>
       <Box my={4}>
@@ -79,19 +112,20 @@ const Dashboard = () => {
         </Grid>
       </Box>
       <Box my={3}>
-      <Stack direction="row" spacing={1}>
-        {searched.map((search, id) => (
-          <Chip
-            key={id}
-            label={search}
-            variant="outlined"
-            onDelete={() => handleTagDelete(search)}
-            deleteIcon={<Clear />}
-          />
-        ))}
+        <Stack direction="row" spacing={1}>
+          {searched.map((search, id) => (
+            <Chip
+              key={id}
+              label={search}
+              variant="outlined"
+              onDelete={() => handleTagDelete(search)}
+              deleteIcon={<Clear />}
+            />
+          ))}
         </Stack>
       </Box>
       <Box mb={3} sx={{ borderBottom: "2px dashed #E6E6E7" }} />
+{state.tableData.length?
 
       <CustomTable
         headings={[
@@ -139,7 +173,6 @@ const Dashboard = () => {
                   handleClick={() => navigate(`/candidates/${id}`)}
                   status={status}
                   fullWidth
-               
                 >
                   {status}
                 </SplitButton>
@@ -148,6 +181,11 @@ const Dashboard = () => {
           )
         )}
       </CustomTable>
+:<Box>
+  <Typography>
+    No data available
+  </Typography>
+  </Box>}
     </div>
   );
 };

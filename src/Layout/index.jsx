@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import {
   Container,
   Box,
@@ -8,6 +9,7 @@ import {
   AppBar,
 } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+
 
 const theme = createTheme({
   palette: {
@@ -27,15 +29,20 @@ const theme = createTheme({
 });
 
 export default function Layout({ children }) {
+  const location = useLocation()
+  const navigate = useNavigate()
+ 
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <AppBar color="inherit" elevation={1}>
         <Toolbar>
           <Typography
+          onClick={()=>navigate("/")}
             variant="h5"
             sx={{
               fontWeight: "bold",
+              cursor:"pointer",
               color: (globalTheme) => globalTheme.palette.success.main,
               mr:10
             }}
@@ -43,9 +50,12 @@ export default function Layout({ children }) {
           >
             Project
           </Typography>
-          <Typography sx={{fontWeight:"bold"}}>
-          Recruitement Pipeline
-          </Typography>
+          {location.pathname==="/"?null:
+            <Typography sx={{fontWeight:"bold"}}>
+            Recruitement Pipeline
+            </Typography>
+          }
+        
         </Toolbar>
       </AppBar>
       <Toolbar id="back-to-top-anchor" />
