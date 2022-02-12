@@ -10,12 +10,13 @@ let data = [
     cv: "",
     email: "sarangsami@live.com",
     skills: ["React", "Laravel"],
-    status: "First contact",
+    status: "First Contact",
     experience: 3,
     phoneNumber:"+989170910019",
     position:"Frontend",
     candidateSource:"Linkedin",
-    location:"Germany"
+    location:"Germany",
+    createdAt:"2021-02-12T05:29:03.688Z"
   },
   {
     id: 2,
@@ -33,7 +34,8 @@ let data = [
     phoneNumber:"+989170910019",
     position:"CTO",
     candidateSource:"Linkedin",
-    location:"Georgia"
+    location:"Georgia",
+    createdAt:"2020-02-12T05:29:03.688Z"
   },
   {
     id: 3,
@@ -51,7 +53,8 @@ let data = [
     phoneNumber:"+989170910019",
     position:"Backend",
     candidateSource:"Linkedin",
-    location:"Ghana"
+    location:"Ghana",
+    createdAt:"2022-02-12T05:29:03.688Z"
   },
 ]
 

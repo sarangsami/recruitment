@@ -38,18 +38,7 @@ const Dashboard = () => {
    setSearched(finalSearch)
   };
 
-  const statusColorGenerator = (status) => {
-    switch (status) {
-      case "First contact":
-        return "primary";
-      case "Rejected":
-        return "error";
-      case "Interview":
-        return "success";
-      default:
-        return "primary";
-    }
-  };
+  
 
   const handleSearchSubmit = () => {
     if (searchInput !== "") {
@@ -148,7 +137,9 @@ const Dashboard = () => {
               <TableCell>
                 <SplitButton
                   handleClick={() => navigate(`/candidates/${id}`)}
-                  color={statusColorGenerator(status)}
+                  status={status}
+                  fullWidth
+               
                 >
                   {status}
                 </SplitButton>

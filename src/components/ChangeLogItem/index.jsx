@@ -2,7 +2,33 @@ import { Typography, Box } from "@mui/material";
 import { showDate } from "utils/globalFunctions";
 
 const ChangeLogItem = (props) => {
-  const { message, date, old } = props;
+  const { message, date, old,noTo } = props;
+
+  const colorGenerator = (type,globalTheme) =>{
+    switch (type) {
+      case "Initial":
+        return "#f5f5f5"
+      
+      case "First Contact":
+        return globalTheme.palette.success.main
+     
+      case "Interview":
+        return globalTheme.palette.primary.main
+      
+      case "Tech Assignment":
+        return globalTheme.palette.warning.main
+     
+      case "Rejected":
+        return globalTheme.palette.error.main
+       
+      case "Hired":
+        return globalTheme.palette.info.main
+      
+
+      default:
+        return globalTheme.palette.inherit.main
+    }
+  }
 
   return (
     <Box>
@@ -15,6 +41,19 @@ const ChangeLogItem = (props) => {
               component="span"
               variant="body2"
             >
+              {message.includes("status")&&
+               <Box
+               sx={{
+                 width: 10,
+                 height: 10,
+                 borderRadius:1,
+                 bgcolor:(globalTheme)=>colorGenerator(old,globalTheme),
+                 display: "inline-block",
+                 mx: 1,
+               }}
+             />
+              }
+             
               {old}{" "}
             </Typography>
           ) : (
@@ -29,13 +68,26 @@ const ChangeLogItem = (props) => {
               </Typography>
             ))
           )}
-          to
+          {noTo?"":"to"}
+        
           {typeof props.new === "string" ? (
             <Typography
               sx={{ color: "black" }}
               component="span"
               variant="body2"
             >
+               {message.includes("status")&&
+               <Box
+               sx={{
+                 width: 10,
+                 height: 10,
+                 borderRadius:1,
+                 bgcolor:(globalTheme)=>colorGenerator(props.new,globalTheme),
+                 display: "inline-block",
+                 mx: 1,
+               }}
+             />
+              }
               {" "}
               {props.new}
             </Typography>
